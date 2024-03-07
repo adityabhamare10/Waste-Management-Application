@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -18,10 +19,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.denzcoskun.imageslider.ImageSlider;
+import com.denzcoskun.imageslider.constants.ScaleTypes;
+import com.denzcoskun.imageslider.models.SlideModel;
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.ArrayList;
 
+public class MainActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     DrawerLayout drawerLayout;
@@ -34,6 +39,15 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         drawerLayout = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.navigationView);
+        ImageSlider imageSlider = findViewById(R.id.imageSlider);
+
+        ArrayList<SlideModel> slideModels = new ArrayList<>();
+
+        slideModels.add(new SlideModel(R.drawable.w1, ScaleTypes.FIT));
+        slideModels.add(new SlideModel(R.drawable.w2, ScaleTypes.FIT));
+        slideModels.add(new SlideModel(R.drawable.w3, ScaleTypes.FIT));
+
+        imageSlider.setImageList(slideModels, ScaleTypes.FIT);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Welcome!!");
@@ -54,10 +68,19 @@ public class MainActivity extends AppCompatActivity {
 
                 if(id == R.id.wasteEducation){
                     Toast.makeText(MainActivity.this, "Education", Toast.LENGTH_SHORT).show();
-                    loadFragment(new EducationFragment());
+//                    loadFragment(new EducationFragment());
+                    Intent intent = new Intent(MainActivity.this, EducationActivity.class);
+                    startActivity(intent);
                 }else if(id == R.id.recyling){
                     Toast.makeText(MainActivity.this, "Recycling", Toast.LENGTH_SHORT).show();
-                    loadFragment(new RecyclingFragment());
+//                    loadFragment(new RecyclingFragment());
+                    Intent intent = new Intent(MainActivity.this, RecyclingActivity.class);
+                    startActivity(intent);
+                }else if(id == R.id.scan){
+                    Toast.makeText(MainActivity.this, "Opening Scanner", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this, ScanActivity.class);
+                    startActivity(intent);
+
                 }else if(id == R.id.homeMain){
                     Intent intent = new Intent(MainActivity.this, MainActivity.class);
                     startActivity(intent);
@@ -86,17 +109,19 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void loadFragment(Fragment fragment) {
-
-        FragmentManager fm = getSupportFragmentManager();
-//        fm.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 
 
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.container, fragment);
-        ft.commit();
-
-    }
+//    private void loadFragment(Fragment fragment) {
+//
+//        FragmentManager fm = getSupportFragmentManager();
+////        fm.popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+//
+//
+//        FragmentTransaction ft = fm.beginTransaction();
+//        ft.replace(R.id.container, fragment);
+//        ft.commit();
+//
+//    }
 
 
     @Override
