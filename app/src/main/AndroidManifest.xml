@@ -9,11 +9,14 @@
         android:icon="@mipmap/ic_launcher"
         android:label="Waste Management"
         android:supportsRtl="true"
+        android:theme="@style/Theme.WasteManagement"
         tools:targetApi="31">
         <activity
+            android:name=".SettingActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
-            android:exported="true"
-            android:theme = "@style/myThemeNoActionBar">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
