@@ -13,15 +13,18 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.icu.number.Scale;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
@@ -31,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
+    FloatingActionButton fab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,12 +44,24 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawerLayout);
         navigationView = findViewById(R.id.navigationView);
         ImageSlider imageSlider = findViewById(R.id.imageSlider);
+        fab = findViewById(R.id.fabScan);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, ScanActivity3.class);
+                startActivity(i);
+            }
+        });
+
+
 
         ArrayList<SlideModel> slideModels = new ArrayList<>();
 
         slideModels.add(new SlideModel(R.drawable.w1, ScaleTypes.FIT));
         slideModels.add(new SlideModel(R.drawable.w2, ScaleTypes.FIT));
         slideModels.add(new SlideModel(R.drawable.w3, ScaleTypes.FIT));
+        slideModels.add(new SlideModel(R.drawable.w4, ScaleTypes.FIT));
 
         imageSlider.setImageList(slideModels, ScaleTypes.FIT);
 
@@ -78,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                 }else if(id == R.id.scan){
                     Toast.makeText(MainActivity.this, "Opening Scanner", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(MainActivity.this, ScanActivity.class);
+                    Intent intent = new Intent(MainActivity.this, ScanActivity3.class);
                     startActivity(intent);
 
                 }else if(id == R.id.homeMain){
